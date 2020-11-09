@@ -1,0 +1,11 @@
+---
+  - name: Initialize, add and commit new directories as git repos
+    shell: |
+      mkdir /home/{{ item.key }}/{{ item.value.dir }} 
+      cd /home/{{ item.key }}/{{ item.value.dir }} &&
+      git add . && git commit -m 'commit for directory {{ item.value.dir }}' 
+      exit 0
+    loop:  "{{ lookup('dict', users }}"
+    when: (item.value.grp == "sre" and ansible_hostname == item.value.sys) or (item.value.grp == "devops" and ansible_hostname == item.value.sys) or (item.value.grp == "engmgr")
+
+      

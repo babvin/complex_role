@@ -1,0 +1,9 @@
+---
+  - name: Download the config template and place it to tmp
+    get_url: 
+      url: http://nextcloud.vinaybabu.in/s/FxEdr5CQ78XsnWs
+      dest: /tmp/httpd.conf.j2
+    register: get_url_template
+  - debug:
+      var: get_url_template
+

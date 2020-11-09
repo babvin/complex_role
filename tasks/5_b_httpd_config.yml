@@ -1,0 +1,12 @@
+---
+  - name: Apply the Jinja2 templated httpd config file to /etc/httpd/conf/httpd.conf
+    template:
+      src: /tmp/httpd.conf.j2
+      dest: /etc/httpd/conf/httpd.conf
+      owner: root
+      group: root
+      mode: 0600
+    register: apply_config
+    when: get_url_template.changed
+  - debug: 
+      var: apply_config

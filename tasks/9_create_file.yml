@@ -1,0 +1,10 @@
+---
+  - name: Create a file in root partition
+    lineinfile:
+      line: "DO407 > EX407 > Vinay"
+      path: /IAmReadyforExam.pass
+      create: yes
+      owner: vagrant
+      group: vagrant
+      mode: 0644
+

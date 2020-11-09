@@ -1,0 +1,15 @@
+---
+  - name: Disable mariadb service 
+    service:
+      name: mariadb
+      state: stopped
+      enabled: no
+    register: disable_maria
+  - debug:
+      var: disable_maria
+
+  - name: Disable firewall
+    firewalld:
+      service: mariadb
+      state: disabled
+      permanent: yes

@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include mariadb_httpd"
+      include_role:
+        name: "mariadb_httpd"

@@ -1,0 +1,24 @@
+---
+  - name: Install mariadb
+    yum:
+      name: 
+        - mariadb-server
+        - mariadb-client
+      state: latest
+    notify: restart mariadb
+    register: install_mariadb
+  - debug:
+      var: install_mariadb
+  
+  - name: Add firewall rules
+    firewalld:
+      service: mariadb
+      state: enabled
+      immediate: yes
+      permanent: yes
+    register: firewall_config
+  - debug:
+      var: firewall_config
+
+      
+      

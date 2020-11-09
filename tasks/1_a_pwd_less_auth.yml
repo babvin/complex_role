@@ -1,0 +1,7 @@
+---
+  - name: upload public key of vagrant to new user - enable password less auth
+    authorized_key:
+      user: "{{ item.key }}"
+      key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+    loop: "{{ lookup('dict', users }}"
+    register: ssh_keys

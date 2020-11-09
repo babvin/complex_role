@@ -1,0 +1,19 @@
+---
+  - name: Install httpd 
+    yum:
+      name: httpd
+      state: latest
+    notify: restart httpd
+    register: install_httpd
+  - debug:
+      install_httpd
+
+  - name: configure firewall rules
+    firewalld:
+      ports:
+        - 80/tcp
+        - 443/tcp
+      state: enabled
+      immediate: yes
+      permanent: yes
+

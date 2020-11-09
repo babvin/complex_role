@@ -1,0 +1,24 @@
+---
+# vars file for mariadb_httpd
+  users:
+    rocky:
+      dir: guitar
+      grp: devops
+      sys: node1  
+    ramki:
+      dir: kailash
+      grp: sre
+      sys: node2
+    shank:
+      dir: gururayaru
+      grp: devops
+      sys: node1
+    kwaza:
+      dir: kannada
+      grp: sre
+      sys: node2
+    vinay:
+      dir: hottepadu
+      grp: engmgr
+      sys: all
+

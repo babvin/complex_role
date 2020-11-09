@@ -1,0 +1,9 @@
+---
+  - name: show message of the day to the users
+    copy:
+      content: "Namaskaara! Bhashe Bhaava - Kannada"
+      dest: /etc/motd
+      owner: root
+      group: root
+      mode: 0644
+      

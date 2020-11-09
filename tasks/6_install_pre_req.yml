@@ -1,0 +1,8 @@
+---
+  - name: Install rsync required for syncronize
+    yum:
+      name: rsync
+      state: present
+    register: install_rsync
+  - debug:
+      var: install_rsync

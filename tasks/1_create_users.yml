@@ -1,0 +1,19 @@
+---
+  - name: create users, add to respective supplementory group and create ssh key
+    group:
+      name: "{{ item.value.grp }}"
+      state: present
+    loop: "{{ lookup('dict', users }}"
+    when: (item.value.grp == "sre" and ansible_hostname == item.value.sys) or (item.value.grp == "devops" and ansible_hostname == item.value.sys) or (item.value.grp == "engmgr")
+    register: create_groups
+  - debug:
+      var: create_groups.status
+  - user: 
+      name: "{{ item.key }}"
+      generate_ssh_key: yes
+      ssh_key_bits: 2048
+      ssh_key_file: .ssh/id_rsa
+      groups: "{{ item.value.grp }}"
+      append: yes
+    loop: "{{ lookup('dict', users }}"
+    register: create_users
