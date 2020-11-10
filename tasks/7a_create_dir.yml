@@ -1,0 +1,9 @@
+---
+  - name: Create a directory in web server path
+    file:
+      path: /var/www/html/joe_biden/
+      mode: 0644
+      state: directory
+    register: create_directory
+  - debug:
+      var: create_directory

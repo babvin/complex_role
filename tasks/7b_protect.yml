@@ -1,0 +1,12 @@
+---
+  - include_vars: files/protect.sec
+  - name: Protect Joe Biden web directory
+    htpasswd:
+      path: /var/www/html/joe_biden/.htaccess
+      name: "{{ username }}"
+      password: "{{ password }}"
+      group: apache
+      mode: 0600
+    register: protect
+  - debug:
+      var: protect
