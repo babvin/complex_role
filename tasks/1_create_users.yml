@@ -3,11 +3,11 @@
     group:
       name: "{{ item.value.grp }}"
       state: present
-    loop: "{{ lookup('dict', users }}"
+    loop: "{{ lookup('dict', users) }}"
     when: (item.value.grp == "sre" and ansible_hostname == item.value.sys) or (item.value.grp == "devops" and ansible_hostname == item.value.sys) or (item.value.grp == "engmgr")
     register: create_groups
   - debug:
-      var: create_groups.status
+      var: create_groups
   - user: 
       name: "{{ item.key }}"
       generate_ssh_key: yes
@@ -15,5 +15,8 @@
       ssh_key_file: .ssh/id_rsa
       groups: "{{ item.value.grp }}"
       append: yes
-    loop: "{{ lookup('dict', users }}"
+    when: (item.value.grp == "sre" and ansible_hostname == item.value.sys) or (item.value.grp == "devops" and ansible_hostname == item.value.sys) or (item.value.grp == "engmgr")
+    loop: "{{ lookup('dict', users) }}"
     register: create_users
+  - debug:
+      var: create_users

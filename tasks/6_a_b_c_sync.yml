@@ -8,34 +8,37 @@
       state: directory
     register: backup_dir
   - debug: 
-    var: backup_dir
+      var: backup_dir
 
   - name: Sync the directories from node1 to node2  
     synchronize:
       src: "{{ item }}"
-      dest: rsync://node2/srv/backup
-    when: inventory_hostname == "node1"
+      dest: /srv/backup
+      rsync_path: /usr/bin/rsync
+    #when: inventory_hostname == "node1"
     with_items:
       - /home/rocky/guitar
       - /home/shank/gururayaru
       - /home/vinay/hottepadu
     register: sync_node2
+    ignore_errors: yes
   - debug:
       var: sync_node2
 
   - name: Sync the directories from node2 to node1   
     synchronize:
       src: "{{ item }}"
-      dest: rsync://node1/srv/backup
-    when: inventory_hostname == "node2"
+      dest: /srv/backup
+      rsync_path: /usr/bin/rsync
+    #when: inventory_hostname == "node2"
     with_items:
       - /home/kwaza/kannada
       - /home/ramki/kailash
       - /home/vinay/hottepadu
     register: sync_node1
+    ignore_errors: yes
   - debug:
       var: sync_node1
-
 
 
 

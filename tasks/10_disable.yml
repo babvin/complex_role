@@ -1,15 +1,15 @@
 ---
   - name: Disable mariadb service 
     service:
-      name: mariadb
+      name: mysqld
       state: stopped
       enabled: no
     register: disable_maria
   - debug:
-      var: disable_maria
+      var: disable_maria.state
 
   - name: Disable firewall
     firewalld:
-      service: mariadb
+      port: 3306/tcp 
       state: disabled
       permanent: yes

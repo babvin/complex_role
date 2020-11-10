@@ -6,14 +6,17 @@
     notify: restart httpd
     register: install_httpd
   - debug:
-      install_httpd
+      var: install_httpd
 
-  - name: configure firewall rules
+  - name: httpd configure firewall rules
     firewalld:
-      ports:
-        - 80/tcp
-        - 443/tcp
+      port: "{{ item }}"
       state: enabled
       immediate: yes
       permanent: yes
-
+    with_items:
+      - 80/tcp
+      - 443/tcp
+    register: httpd_firewall
+  - debug:
+      var: httpd_firewall

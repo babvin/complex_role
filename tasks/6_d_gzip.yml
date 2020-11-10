@@ -2,7 +2,7 @@
   - name: gzip all files
     archive:
       path: /srv/backup
-      dest: /srv
+      dest: /srv/"{{ ansible_date_time.date }}".tar.gz
       format: gz
       remove: no
     register: gzip

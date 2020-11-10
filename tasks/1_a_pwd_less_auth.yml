@@ -3,5 +3,6 @@
     authorized_key:
       user: "{{ item.key }}"
       key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
-    loop: "{{ lookup('dict', users }}"
+    loop: "{{ lookup('dict', users) }}"
+    when: (item.value.grp == "sre" and ansible_hostname == item.value.sys) or (item.value.grp == "devops" and ansible_hostname == item.value.sys) or (item.value.grp == "engmgr")
     register: ssh_keys

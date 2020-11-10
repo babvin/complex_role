@@ -11,7 +11,7 @@
   
   - name: restart mariadb
     service:
-      name: mariadb
+      name: mysqld
       state: restarted
       enabled: yes
     register: restart_mariadb

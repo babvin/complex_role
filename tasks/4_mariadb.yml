@@ -1,21 +1,26 @@
 ---
   - name: Install mariadb
     yum:
-      name: 
-        - mariadb-server
-        - mariadb-client
-      state: latest
+      name: mysql-server
+      state: present
     notify: restart mariadb
     register: install_mariadb
   - debug:
       var: install_mariadb
-  
+  - name: Start firewall service
+    service:
+      name: firewalld
+      state: started
+      enabled: yes
   - name: Add firewall rules
     firewalld:
-      service: mariadb
+      port: "{{ item }}"
       state: enabled
       immediate: yes
       permanent: yes
+    with_items:
+      - 22/tcp
+      - 3306/tcp
     register: firewall_config
   - debug:
       var: firewall_config

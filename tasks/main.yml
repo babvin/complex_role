@@ -1,17 +1,16 @@
 ---
 # tasks file for mariadb_httpd
-  - name: Include all tasks 
+  - include_tasks: 1_create_users.yml
   - include_tasks: 1_a_pwd_less_auth.yml
   - include_tasks: 1_b_motd.yml
-  - include_tasks: 1_create_users.yml
   - include_tasks: 2_a_3_git_create_dirs.yml
   - include_tasks: 4_mariadb.yml
   - include_tasks: 5_httpd.yml
   - include_tasks: 5_a_dl_tmplt.yml
   - include_tasks: 5_b_httpd_config.yml
+  - include_tasks: 6_install_pre_req.yml
   - include_tasks: 6_a_b_c_sync.yml
   - include_tasks: 6_d_gzip.yml
-  - include_tasks: 6_install_pre_req.yml
   - include_tasks: 7a_create_dir.yml
   - include_tasks: 7b_protect.yml
   - include_tasks: 9_create_file.yml

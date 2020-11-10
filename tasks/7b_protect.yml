@@ -1,5 +1,5 @@
 ---
-  - include_vars: files/protect.sec
+  - include_vars: files/protect.yml
   - name: Protect Joe Biden web directory
     htpasswd:
       path: /var/www/html/joe_biden/.htaccess

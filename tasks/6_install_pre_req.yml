@@ -1,8 +1,29 @@
 ---
   - name: Install rsync required for syncronize
     yum:
-      name: rsync
+      name: 
+        - rsync
+        - rsync-daemon
+        - python3-passlib
       state: present
     register: install_rsync
   - debug:
       var: install_rsync
+  - shell: setsebool -P rsync_export_all_ro 1
+  - name: Start rsync service
+    service:
+      name: rsyncd
+      state: started
+      enabled: yes
+    register: rsync_svc
+  - debug:
+      var: rsync_svc
+  - name: Configure rsync firewall rules
+    firewalld:
+      port: 873/tcp
+      state: enabled
+      immediate: yes
+      permanent: yes
+    register: firewall_rsync
+  - debug:
+      var: firewall_rsync
